@@ -34,7 +34,13 @@ def convert(group_into_folders, files):
     
 def make_zip_with_results():
     # zips all the files in the output_json folder and returns the path to the zip file
-    os.system("powershell Compress-Archive -Path output_json/* -DestinationPath output_json.zip")
+    
+    # for windows
+    if os.name == "nt":
+        os.system("powershell Compress-Archive -Path output_json/* -DestinationPath output_json.zip")
+        
+    else:
+        os.system("zip -r output_json.zip output_json")    
     
     return os.path.abspath("output_json.zip")
     
