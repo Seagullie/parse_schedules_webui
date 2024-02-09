@@ -7,7 +7,11 @@ import ParseSchedules
 
 def clean_up():
     # force delete and then create output_json folder (windows and linux agnostic way)
-    os.system("rmdir /s /q output_json")
+    if os.name == "nt":
+        os.system("rmdir /s /q output_json")
+    else:
+        os.system("rm -r output_json")
+    
     os.system("mkdir output_json")
     
     # delete archive with results if it exists
